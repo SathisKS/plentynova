@@ -455,6 +455,9 @@ class PaymentService
         }
         $customerName = $this->getCustomerName($billingAddress);
         
+        /** @var \Plenty\Modules\Frontend\Services\VatService $vatService */
+        $vatService = pluginApp(\Plenty\Modules\Frontend\Services\VatService::class);
+        
         //we have to manipulate the basket because its stupid and doesnt know if its netto or gross
         if(!count($vatService->getCurrentTotalVats())) {
             $basket->itemSum = $basket->itemSumNet;
