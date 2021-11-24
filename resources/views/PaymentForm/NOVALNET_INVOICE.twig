@@ -14,8 +14,8 @@
         <div class="modal-title" style="color:#008EBF;"><b>{{trans("Novalnet::PaymentMethod.note")}}</b> {{ trans("Novalnet::PaymentMethod.dobshowingreason") }}</div><br>
         <fieldset>      
                 <input type="hidden" id="paymentKey" name="paymentKey" value="{{paymentMopKey}}">
-                <input type="hidden" id="nn_dob_empty" name="nn_dob_empty" value="{{trans("Novalnet::PaymentMethod.dobEmpty")}}">
-                <input type="hidden" id="nn_dob_invalid" name="nn_dob_invalid" value="{{trans("Novalnet::PaymentMethod.dobInvalid")}}">
+                <input type="hidden" id="nn_dob_empty" name="nn_dob_empty" value="{{trans("Novalnet::Customize.template_dob_empty")}}">
+                <input type="hidden" id="nn_dob_invalid" name="nn_dob_invalid" value="{{trans("Novalnet::Customize.template_dob_invalid")}}">
                 <input type="hidden" id="nn_dob_month" name="nn_dob_month" value="{{trans("Novalnet::PaymentMethod.monthOption")}}">
                 <input type="hidden" name="nn_invoice_valid_dob_msg" id="nn_invoice_valid_dob_msg" value="{{trans("Novalnet::PaymentMethod.doberror")}}">
                 {% if reinit is not empty %}
@@ -25,7 +25,7 @@
                     <input type="hidden" id="nn_shipping_addressid" name="nn_shipping_addressid" value="{{shippingAddressId}}">
                 {% endif %}
                 <div class="row">
-                    <div class="col-sm-12"><b><label for="nn_birthday">{{trans("Novalnet::PaymentMethod.birthdate_label")}}<span class="text-danger">*</span></label></b></div>
+                    <div class="col-sm-12"><b><label for="nn_birthday">{{trans("Novalnet::Customize.template_birthdate_label")}}<span class="text-danger">*</span></label></b></div>
                     <div class="col-sm-4">
                         <input type="tel" name="nn_guarantee_date" id="nn_guarantee_date" maxlength="2" placeholder="{{trans("Novalnet::PaymentMethod.day")}}" class="form-control" autocomplete="off">
                     </div>
@@ -51,7 +51,7 @@
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="novalnet_form_btn" onclick="">
             <i class="fa fa-check" aria-hidden="true"> </i>
-            {{ trans("Novalnet::PaymentMethod.submit_button_text") }}
+            {{ trans("Novalnet::Customize.template_submit_button_text") }}
         </button>
     </div>
 </form>
