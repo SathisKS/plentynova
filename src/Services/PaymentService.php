@@ -534,7 +534,7 @@ class PaymentService
         $textFields = array( 'novalnet_cc_holder_Label', 'novalnet_cc_holder_input', 'novalnet_cc_number_label', 'novalnet_cc_number_input', 'novalnet_cc_expirydate_label', 'novalnet_cc_expirydate_input', 'novalnet_cc_cvc_label', 'novalnet_cc_cvc_input', 'novalnet_cc_error' );
 
         foreach ($textFields as $value) {
-            $ccformFields[$value] = $this->paymentHelper->getTranslatedText($value);
+            $ccformFields[$value] = $this->paymentHelper->getCustomizedTranslatedText($value);
         }
         return json_encode($ccformFields);
     }
