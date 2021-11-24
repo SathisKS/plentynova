@@ -241,8 +241,6 @@ class NovalnetServiceProvider extends ServiceProvider
                             $endCustomerName = $firstName .' '. $lastName;
                             $endUserName = $address->firstName .' '. $address->lastName;
 
-                        $name = trim($config->get('Novalnet.' . strtolower($paymentKey) . '_payment_name'));
-                        $paymentName = ($name ? $name : $paymentHelper->getTranslatedText(strtolower($paymentKey)));
                         $redirect = $paymentService->isRedirectPayment($paymentKey, false);    
                             
                         if ($redirect && $paymentKey != 'NOVALNET_CC') { # Redirection payments
@@ -263,7 +261,7 @@ class NovalnetServiceProvider extends ServiceProvider
                             $content = $twig->render('Novalnet::PaymentForm.NOVALNET_CC', [
                                 'nnPaymentProcessUrl'   => $paymentService->getProcessPaymentUrl(),
                                 'paymentMopKey'         =>  $paymentKey,
-                                'paymentName' => $paymentName,
+                                'paymentName' => $paymentHelper->getCustomizedTranslatedText('template_' . strtolower($paymentKey)),
                                 'ccFormDetails'       => !empty($ccFormDetails) ? $ccFormDetails : '',
                                 'ccCustomFields'       => !empty($ccCustomFields) ? $ccCustomFields : ''
                                  ]);
@@ -285,7 +283,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                     $content = $twig->render('Novalnet::PaymentForm.NOVALNET_SEPA', [
                                                                     'nnPaymentProcessUrl' => $paymentService->getProcessPaymentUrl(),
                                                                     'paymentMopKey'     =>  $paymentKey,
-                                                                    'paymentName' => $paymentName,  
+                                                                    'paymentName' => $paymentHelper->getCustomizedTranslatedText('template_' . strtolower($paymentKey)), 
                                                                     'endcustomername'=> empty(trim($endUserName)) ? $endCustomerName : $endUserName,
                                                                     'nnGuaranteeStatus' => $show_birthday ? $guaranteeStatus : ''
                                                                     ]);
@@ -312,7 +310,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                             if (empty($address->companyName) &&  empty($birthday) ) {
                                             $content = $twig->render('Novalnet::PaymentForm.NOVALNET_INVOICE', [
                                                                 'nnPaymentProcessUrl' => $paymentProcessUrl,
-                                                'paymentName' => $paymentName,  
+                                                'paymentName' => $paymentHelper->getCustomizedTranslatedText('template_' . strtolower($paymentKey)),  
                                                 'paymentMopKey'     =>  $paymentKey,
                                                 'guarantee_force' => trim($config->get('Novalnet.' . strtolower($paymentKey) . '_payment_guarantee_force_active'))
                                             
