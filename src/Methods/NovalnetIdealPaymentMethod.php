@@ -109,8 +109,7 @@ class NovalnetIdealPaymentMethod extends PaymentMethodService
      */
     public function getName():string
     {   
-        $name = trim($this->configRepository->get('Novalnet.novalnet_ideal_payment_name'));
-        return ($name ? $name : $this->paymentHelper->getTranslatedText('novalnet_ideal'));
+        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_novalnet_ideal');
     }
 
     /**
@@ -136,8 +135,7 @@ class NovalnetIdealPaymentMethod extends PaymentMethodService
      */
     public function getDescription():string
     {
-        $description = trim($this->configRepository->get('Novalnet.novalnet_ideal_description'));
-        return ($description ? $description : sprintf($this->paymentHelper->getTranslatedText('redirectional_payment_description'),$this->paymentHelper->getTranslatedText('novalnet_ideal')));
+       return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_ideal_payment_description');
     }
 
     /**
