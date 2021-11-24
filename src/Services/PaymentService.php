@@ -531,7 +531,7 @@ class PaymentService
             $ccformFields[$value] = trim($this->config->get('Novalnet.' . $value));
         }
 
-        $textFields = array( 'novalnet_cc_holder_Label', 'novalnet_cc_holder_input', 'novalnet_cc_number_label', 'novalnet_cc_number_input', 'novalnet_cc_expirydate_label', 'novalnet_cc_expirydate_input', 'novalnet_cc_cvc_label', 'novalnet_cc_cvc_input', 'novalnet_cc_error' );
+        $textFields = array( 'template_novalnet_cc_holder_Label', 'template_novalnet_cc_holder_input', 'template_novalnet_cc_number_label', 'template_novalnet_cc_number_input', 'template_novalnet_cc_expirydate_label', 'template_novalnet_cc_expirydate_input', 'template_novalnet_cc_cvc_label', 'template_novalnet_cc_cvc_input', 'template_novalnet_cc_error' );
 
         foreach ($textFields as $value) {
             $ccformFields[$value] = $this->paymentHelper->getCustomizedTranslatedText($value);
