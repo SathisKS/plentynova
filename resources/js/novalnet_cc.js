@@ -74,24 +74,24 @@ function loadNovalnetCcIframe()
             lang : (ccFormDetails.lang !== undefined) ? ccFormDetails.lang : 'en',
             error: (ccCustomFields.credit_card_error !== undefined) ? ccCustomFields.credit_card_error : '',
             card_holder : {
-              label: (ccCustomFields.novalnet_cc_holder_Label !== undefined) ? ccCustomFields.novalnet_cc_holder_Label : '',
-              place_holder: (ccCustomFields.novalnet_cc_holder_input !== undefined) ? ccCustomFields.novalnet_cc_holder_input : '',
-              error: (ccCustomFields.novalnet_cc_error !== undefined) ? ccCustomFields.novalnet_cc_error : ''
+              label: (ccCustomFields.template_novalnet_cc_holder_Label !== undefined) ? ccCustomFields.template_novalnet_cc_holder_Label : '',
+              place_holder: (ccCustomFields.template_novalnet_cc_holder_input !== undefined) ? ccCustomFields.template_novalnet_cc_holder_input : '',
+              error: (ccCustomFields.template_novalnet_cc_error !== undefined) ? ccCustomFields.template_novalnet_cc_error : ''
             },
             card_number : {
-              label: (ccCustomFields.novalnet_cc_number_label !== undefined) ? ccCustomFields.novalnet_cc_number_label : '',
-              place_holder: (ccCustomFields.novalnet_cc_number_input !== undefined) ? ccCustomFields.novalnet_cc_number_input : '',
-              error: (ccCustomFields.novalnet_cc_error !== undefined) ? ccCustomFields.novalnet_cc_error : ''
+              label: (ccCustomFields.template_novalnet_cc_number_label !== undefined) ? ccCustomFields.template_novalnet_cc_number_label : '',
+              place_holder: (ccCustomFields.template_novalnet_cc_number_input !== undefined) ? ccCustomFields.template_novalnet_cc_number_input : '',
+              error: (ccCustomFields.template_novalnet_cc_error !== undefined) ? ccCustomFields.template_novalnet_cc_error : ''
             },
             expiry_date : {
-              label: (ccCustomFields.novalnet_cc_expirydate_label !== undefined) ? ccCustomFields.novalnet_cc_expirydate_label : '',
-              place_holder: (ccCustomFields.novalnet_cc_expirydate_input !== undefined) ? ccCustomFields.novalnet_cc_expirydate_input : '',
-              error: (ccCustomFields.novalnet_cc_error !== undefined) ? ccCustomFields.novalnet_cc_error : ''
+              label: (ccCustomFields.template_novalnet_cc_expirydate_label !== undefined) ? ccCustomFields.template_novalnet_cc_expirydate_label : '',
+              place_holder: (ccCustomFields.template_novalnet_cc_expirydate_input !== undefined) ? ccCustomFields.template_novalnet_cc_expirydate_input : '',
+              error: (ccCustomFields.template_novalnet_cc_error !== undefined) ? ccCustomFields.template_novalnet_cc_error : ''
             },
             cvc : {
-              label: (ccCustomFields.novalnet_cc_cvc_label !== undefined) ? ccCustomFields.novalnet_cc_cvc_label : '',
-              place_holder: (ccCustomFields.novalnet_cc_cvc_input !== undefined) ? ccCustomFields.novalnet_cc_cvc_input : '',
-              error: (ccCustomFields.novalnet_cc_error !== undefined) ? ccCustomFields.novalnet_cc_error : ''
+              label: (ccCustomFields.template_novalnet_cc_cvc_label !== undefined) ? ccCustomFields.template_novalnet_cc_cvc_label : '',
+              place_holder: (ccCustomFields.template_novalnet_cc_cvc_input !== undefined) ? ccCustomFields.template_novalnet_cc_cvc_input : '',
+              error: (ccCustomFields.template_novalnet_cc_error !== undefined) ? ccCustomFields.template_novalnet_cc_error : ''
             }
           }
         },
