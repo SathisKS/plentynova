@@ -135,7 +135,7 @@ class NovalnetPrzelewyPaymentMethod extends PaymentMethodService
      */
     public function getDescription():string
     {
-        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_przelewy_payment_description');
+        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_novalnet_przelewy_payment_description');
     }
 
     /**
