@@ -3,6 +3,11 @@
 <script type="text/javascript">
 
   jQuery(function () {
+    jQuery("[id^='nnReinitPaymentMethod-']").show();
+    
+    jQuery("[id^='nnReinitPaymentMethod-']").click(function () {
+      jQuery("[id^='nnReinitPaymentMethod-']").hide();
+    });
     
     jQuery("#direct-payment-process").click(function () {
       jQuery.get("/payment/novalnet/changePaymentMethod/", function(data)
