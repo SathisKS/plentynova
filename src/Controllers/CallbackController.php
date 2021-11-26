@@ -293,7 +293,7 @@ class CallbackController extends Controller
             }
             if($this->getPaymentTypeLevel() == 2 && $this->aryCaptureParams['tid_status'] == '100')
             {
-                $nnTransactionHistory->additionalInfo = ['type' => 'credit', 'payment_id' => !empty($this->aryCaptureParams['payment_id']) ? $this->aryCaptureParams['payment_id'] : $this->aryCaptureParams['key'] ];
+                $nnTransactionHistory->additionalInfo = ['type' => 'credit'];
                 
                 // Credit entry for the payment types Invoice, Prepayment and Cashpayment.
                 if(in_array($this->aryCaptureParams['payment_type'], ['INVOICE_CREDIT', 'CASHPAYMENT_CREDIT', 'ONLINE_TRANSFER_CREDIT']))
@@ -307,7 +307,7 @@ class CallbackController extends Controller
 
                             $paymentData['currency']    = $this->aryCaptureParams['currency'];
                             $paymentData['paid_amount'] = (float) ($this->aryCaptureParams['amount'] / 100);
-                            $paymentData['tid']         = $this->aryCaptureParams['shop_tid'];
+                            $paymentData['tid']         = $this->aryCaptureParams['tid'];
                             $paymentData['order_no']    = $nnTransactionHistory->orderNo;
                             $paymentData['mop']         = $nnTransactionHistory->mopId;
                             $paymentData['tid_status']  = $this->aryCaptureParams['tid_status'];
