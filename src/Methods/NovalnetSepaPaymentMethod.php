@@ -135,7 +135,7 @@ class NovalnetSepaPaymentMethod extends PaymentMethodService
      */
     public function getDescription():string
     {
-        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_sepa_payment_description');
+        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_novalnet_sepa_payment_description');
     }
 
     /**
