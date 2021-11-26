@@ -135,7 +135,7 @@ class NovalnetEpsPaymentMethod extends PaymentMethodService
      */
     public function getDescription():string
     {
-        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_eps_payment_description');
+        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_novalnet_eps_payment_description');
     }
 
     /**
