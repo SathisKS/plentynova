@@ -134,7 +134,7 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodService
      */
     public function getDescription():string
     {
-        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_invoice_prepayment_payment_description');
+        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_novalnet_invoice_payment_description');
     }
 
     /**
