@@ -137,7 +137,7 @@ class NovalnetGiropayPaymentMethod extends PaymentMethodService
      */
     public function getDescription():string
     {
-        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_giropay_payment_description');
+        return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_novalnet_giropay_payment_description');
     }
 
     /**
