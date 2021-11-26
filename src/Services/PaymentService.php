@@ -987,7 +987,7 @@ class PaymentService
      $additional_info = [
         'currency' => $nnPaymentData['currency'],
         'product_id' => !empty($nnPaymentData['product_id']) ? $nnPaymentData['product_id'] : $nnPaymentData['product'] ,
-        'payment_id' => $nnPaymentData['payment_id'],
+        'payment_id' => !empty($nnPaymentData['payment_id']) ? $nnPaymentData['payment_id'] : $nnPaymentData['key'],
         'plugin_version' => $nnPaymentData['system_version'],
         'test_mode' => !empty($nnPaymentData['test_mode']) ? $this->paymentHelper->getTranslatedText('test_order',$lang) : '0',
         'invoice_type'      => !empty($nnPaymentData['invoice_type']) ? $nnPaymentData['invoice_type'] : '0' ,
