@@ -139,7 +139,7 @@ class NovalnetCcPaymentMethod extends PaymentMethodService
      */
     public function getDescription():string
     {
-         return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_cc_payment_description');
+         return $this->paymentHelper->getCustomizedTranslatedText('paymentmethod_novalnet_cc_payment_description');
     }
 
     /**
