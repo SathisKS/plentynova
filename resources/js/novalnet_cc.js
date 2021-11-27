@@ -71,7 +71,6 @@ function loadNovalnetCcIframe()
           },
           
           text: {
-            lang : (ccFormDetails.lang !== undefined) ? ccFormDetails.lang : 'en',
             error: (ccCustomFields.credit_card_error !== undefined) ? ccCustomFields.credit_card_error : '',
             card_holder : {
               label: (ccCustomFields.template_novalnet_cc_holder_Label !== undefined) ? ccCustomFields.template_novalnet_cc_holder_Label : '',
@@ -118,7 +117,13 @@ function loadNovalnetCcIframe()
           currency: (ccFormDetails.currency !== undefined) ? ccFormDetails.currency : '',
           test_mode: (ccFormDetails.test_mode !== undefined) ? ccFormDetails.test_mode : '0',
           enforce_3d: (ccFormDetails.enforce_3d !== undefined) ? ccFormDetails.enforce_3d : '0',
+        },
+          
+       // Add custom data
+        custom: {
+          lang : (ccFormDetails.lang !== undefined) ? ccFormDetails.lang : 'en',
         }
+          
       };
 
       NovalnetUtility.createCreditCardForm(requestData);
