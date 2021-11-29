@@ -295,7 +295,7 @@ class PaymentService
             'auth_code'          => $this->paymentHelper->getNovalnetConfig('novalnet_auth_code'),
             'product'            => $this->paymentHelper->getNovalnetConfig('novalnet_product_id'),
             'tariff'             => $this->paymentHelper->getNovalnetConfig('novalnet_tariff_id'),
-            'test_mode'          => (int)($this->config->get($testModeKey) == 'true'),
+            'test_mode'          => (int)($this->config->get($testModeKey) == true),
             'first_name'         => !empty($address->firstName) ? $address->firstName : $customerName['firstName'],
             'last_name'          => !empty($address->lastName) ? $address->lastName : $customerName['lastName'],
             'email'              => $address->email,
@@ -385,11 +385,11 @@ class PaymentService
         if(in_array($paymentKey, ['NOVALNET_CC', 'NOVALNET_SEPA', 'NOVALNET_PAYPAL', 'NOVALNET_INVOICE'])) {
             $onHoldLimit = $this->paymentHelper->getNovalnetConfig(strtolower($paymentKey) . '_on_hold');
                 $onHoldAuthorize = $this->paymentHelper->getNovalnetConfig(strtolower($paymentKey) . '_payment_action');
-        if((is_numeric($onHoldLimit) && $paymentRequestData['amount'] >= $onHoldLimit && $onHoldAuthorize == 'true') || ($onHoldAuthorize == 'true' && empty($onHoldLimit))) {
+        if((is_numeric($onHoldLimit) && $paymentRequestData['amount'] >= $onHoldLimit && $onHoldAuthorize == true) || ($onHoldAuthorize == true && empty($onHoldLimit))) {
             $paymentRequestData['on_hold'] = '1';
         }
         if($paymentKey == 'NOVALNET_CC') {
-                    if($this->config->get('Novalnet.novalnet_cc_enforce') == 'true') {
+                    if($this->config->get('Novalnet.novalnet_cc_enforce') == true) {
                         $paymentRequestData['enforce_3d'] = '1';
                     }
             if($doRedirect == true) {
@@ -467,8 +467,8 @@ class PaymentService
         
         $ccFormRequestParameters = [
             'client_key'    => trim($this->config->get('Novalnet.novalnet_client_key')),
-        'enforce_3d'    => (int)($this->config->get('Novalnet.' . strtolower((string) $paymentKey) . '_enforce') == 'true'),
-            'test_mode'     => (int)($this->config->get('Novalnet.' . strtolower((string) $paymentKey) . '_test_mode') == 'true'),
+        'enforce_3d'    => (int)($this->config->get('Novalnet.' . strtolower((string) $paymentKey) . '_enforce') == true),
+            'test_mode'     => (int)($this->config->get('Novalnet.' . strtolower((string) $paymentKey) . '_test_mode') == true),
             'first_name'    => !empty($billingAddress->firstName) ? $billingAddress->firstName : $customerName['firstName'],
             'last_name'     => !empty($billingAddress->lastName) ? $billingAddress->lastName : $customerName['lastName'],
             'email'         => $billingAddress->email,
@@ -703,7 +703,7 @@ class PaymentService
         // Get payment name in lowercase
         $paymentKeyLow = strtolower((string) $paymentKey);
         $guaranteePayment = $this->config->get('Novalnet.'.$paymentKeyLow.'_payment_guarantee_active');
-        if ($guaranteePayment == 'true') {
+        if ($guaranteePayment == true) {
             // Get guarantee minimum amount value
             $minimumAmount = $this->paymentHelper->getNovalnetConfig($paymentKeyLow . '_guarantee_min_amount');
             $minimumAmount = ((preg_match('/^[0-9]*$/', $minimumAmount) && $minimumAmount >= '999')  ? $minimumAmount : '999');
@@ -750,7 +750,7 @@ class PaymentService
             ) && $basket->currency == 'EUR' && ($addressValidation || ($billingAddress === $shippingAddress)))
             )) {
                 $processingType = 'guarantee';
-            } elseif ($this->config->get('Novalnet.'.$paymentKeyLow.'_payment_guarantee_force_active') == 'true') {   
+            } elseif ($this->config->get('Novalnet.'.$paymentKeyLow.'_payment_guarantee_force_active') == true) {   
                 $processingType = 'normal';
             } else {
                 if ( ! in_array( $customerBillingIsoCode, array( 'AT', 'DE', 'CH' ), true ) ) {
