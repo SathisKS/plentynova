@@ -711,7 +711,10 @@ class PaymentService
             $minimumAmount = $this->paymentHelper->getNovalnetConfig($paymentKeyLow . '_guarantee_min_amount');
             $minimumAmount = ((preg_match('/^[0-9]*$/', $minimumAmount) && $minimumAmount >= '999')  ? $minimumAmount : '999');
             $amount        = !empty($basket->basketAmount) ? (sprintf('%0.2f', $basket->basketAmount) * 100) : $orderAmount;
-
+            
+            $this->getLogger(__METHOD__)->error('min amount', $minimumAmount);
+            $this->getLogger(__METHOD__)->error('tx amount', $amount);
+            
             $billingAddressId = !empty($basket->customerInvoiceAddressId) ? $basket->customerInvoiceAddressId : $billingInvoiceAddrId;
             $billingAddress = $this->addressRepository->findAddressById($billingAddressId);
             $customerBillingIsoCode = strtoupper($this->countryRepository->findIsoCode($billingAddress->countryId, 'iso_code_2'));
