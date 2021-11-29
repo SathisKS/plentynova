@@ -81,6 +81,9 @@ class NovalnetPaymentMethodReinitializePayment
           $sessionStorage->getPlugin()->setValue('nnPaymentData', $serverRequestData);
       }
        
+    $paymentHelper->logger('order obj', $order);
+    $paymentHelper->logger('order Amount', $orderAmount);
+    
       if ($paymentKey == 'NOVALNET_CC') {
          $ccFormDetails = $paymentService->getCreditCardAuthenticationCallData($basketRepository->load(), $paymentKey, $orderAmount, $order['billingAddress']['id'], $order['deliveryAddress']['id']);
          $ccCustomFields = $paymentService->getCcFormFields();
