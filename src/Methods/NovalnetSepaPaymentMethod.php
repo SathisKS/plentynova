@@ -145,7 +145,7 @@ class NovalnetSepaPaymentMethod extends PaymentMethodService
      */
     public function isSwitchableTo(): bool
     {
-        $guarantee_status = $this->paymentService->getGuaranteeStatus($this->basket, 'NOVALNET_INVOICE');
+        $guarantee_status = $this->paymentService->getGuaranteeStatus($this->basket, 'NOVALNET_SEPA');
         if(!empty($guarantee_status) && !in_array($guarantee_status, ['normal', 'guarantee'])) {
             return false;
         }
