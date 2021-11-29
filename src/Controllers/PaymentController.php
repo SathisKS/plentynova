@@ -172,6 +172,7 @@ class PaymentController extends Controller
         // Get order amount from the post values
         $orderAmount = !empty($requestData['nn_orderamount']) ? $requestData['nn_orderamount'] : 0;
         
+        // Build the request from the shop order Id for the order amount if the reint feature used else load the basket
         if (!empty($orderAmount)) {
             $serverRequestData = $this->paymentService->getRequestParameters($this->basketRepository->load(), $requestData['paymentKey'], $doRedirect, $orderAmount, $billingAddressId, $shippingAddressId);
         } else {
