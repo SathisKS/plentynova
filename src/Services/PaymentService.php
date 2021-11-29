@@ -464,6 +464,8 @@ class PaymentService
             $basket->shippingAmount = $basket->shippingAmountNet;
             $basket->basketAmount = $basket->basketAmountNet;
         }
+        $this->getLogger(__METHOD__)->error('basket amount', $basket->basketAmount);
+        $this->getLogger(__METHOD__)->error('order amount ser', $orderAmount);
         
         $ccFormRequestParameters = [
             'client_key'    => trim($this->config->get('Novalnet.novalnet_client_key')),
