@@ -289,7 +289,7 @@ class PaymentService
         $customerId = $account->getAccountContactId();
         $paymentKeyLower = strtolower((string) $paymentKey);
         $testModeKey = 'Novalnet.' . $paymentKeyLower . '_test_mode';
-        $this->getLogger(__METHOD__)->error('testmode', $testModeKey);
+        $this->getLogger(__METHOD__)->error('testmode log', $this->config->get($testModeKey));
         $paymentRequestData = [
             'vendor'             => $this->paymentHelper->getNovalnetConfig('novalnet_vendor_id'),
             'auth_code'          => $this->paymentHelper->getNovalnetConfig('novalnet_auth_code'),
