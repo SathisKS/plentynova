@@ -146,11 +146,6 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodService
      */
     public function isSwitchableTo(): bool
     {
-        $guarantee_status = $this->paymentService->getGuaranteeStatus($this->basket, 'NOVALNET_INVOICE');
-        $this->getLogger(__METHOD__)->error('guarantee status', $guarantee_status);
-        if(!empty($guarantee_status) && !in_array($guarantee_status, ['normal', 'guarantee'])) {
-            return false;
-        }
         return true;
     }
 
