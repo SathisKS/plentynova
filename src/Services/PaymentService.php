@@ -828,9 +828,9 @@ class PaymentService
                      $paymentData['due_date'] = !empty($responseData['due_date']) ? $responseData['due_date'] : $bankDetails->due_date;
                      $paymentData['payment_id'] = $key;
                  } 
-               $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('transaction_confirmation'), date('d.m.Y'), date('H:i:s'));
+               $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('transaction_confirmation', $paymentRequestData['lang']), date('d.m.Y'), date('H:i:s'));
            } else {
-            $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('transaction_cancel'), date('d.m.Y'), date('H:i:s'));
+            $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('transaction_cancel', $paymentRequestData['lang']), date('d.m.Y'), date('H:i:s'));
         }
              if (($responseData['tid_status'] == '100' && $key == '27') || $responseData['tid_status'] != '100') {
              $paymentData['paid_amount'] = 0;
