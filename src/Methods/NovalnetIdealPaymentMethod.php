@@ -76,7 +76,7 @@ class NovalnetIdealPaymentMethod extends PaymentMethodService
      */
     public function isActive():bool
     {
-       if ($this->configRepository->get('Novalnet.novalnet_ideal_payment_active') == true) {
+       if ($this->configRepository->get('Novalnet.novalnet_ideal_payment_active') == 'true') {
         
         $active_payment_allowed_country = true;
         if ($allowed_country = $this->configRepository->get('Novalnet.novalnet_ideal_allowed_country')) {
