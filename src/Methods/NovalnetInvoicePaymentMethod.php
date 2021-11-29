@@ -144,14 +144,18 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodService
      *
      * @return bool
      */
-    public function isSwitchableTo(): bool
+    public function isSwitchableTo($orderId = null): bool
     {
-        $guarantee_status = $this->paymentService->getGuaranteeStatus($this->basket, 'NOVALNET_INVOICE');
-        $this->getLogger(__METHOD__)->error('guarantee status', $guarantee_status);
-        if(!empty($guarantee_status) && !in_array($guarantee_status, ['normal', 'guarantee'])) {
-            return false;
+        if($orderId > 0) {
+           $orderObj = $this->paymentHelper->getOrderObject($orderId);
+           $orderAmount = $this->paymentHelper->ConvertAmountToSmallerUnit($orderObj->amounts[0]->invoiceTotal);
+           $guarantee_status = $this->paymentService->getGuaranteeStatus($this->basket, 'NOVALNET_INVOICE', $orderAmount);
+            if(!empty($guarantee_status) && !in_array($guarantee_status, ['normal', 'guarantee'])) {
+                return false;
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
