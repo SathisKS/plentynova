@@ -496,7 +496,7 @@ class CallbackController extends Controller
     public function validateIpAddress()
     {
         $client_ip = $this->paymentHelper->getRemoteAddress();
-        if(!in_array($client_ip, $this->ipAllowed) && $this->config->get('Novalnet.novalnet_callback_test_mode') != true)
+        if(!in_array($client_ip, $this->ipAllowed) && $this->config->get('Novalnet.novalnet_callback_test_mode') != 'true')
         {
             return 'Novalnet callback received. Unauthorised access from the IP '. $client_ip;
         }
@@ -634,7 +634,7 @@ class CallbackController extends Controller
           }
         }
         }
-        $transactionDetails = ($bankDetails == true ) ? $invoiceDetails : $status;
+        $transactionDetails = ($bankDetails == 'true' ) ? $invoiceDetails : $status;
         return $transactionDetails;
     }
 
