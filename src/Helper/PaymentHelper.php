@@ -704,6 +704,28 @@ class PaymentHelper
         return !empty($tid_status) ? $tid_status : '';
     }
     
+    /**
+      * Get order amount from the shop order Id
+      *
+      * @param int $orderId
+      * @return object|null
+      */
+    public function getOrderObject($orderId) 
+    {
+        try {
+            $orderId = (int)$orderId;
+            /** @var \Plenty\Modules\Authorization\Services\AuthHelper $authHelper */
+            $authHelper = pluginApp(AuthHelper::class);
+            /** @var Order $order */
+            $order = $authHelper->processUnguarded(function () use ($orderId) {
+                    return $this->orderRepository->findOrderById($orderId);
+            });
+            return $order;
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+    
     public function logger($k, $v) {
       $this->getLogger(__METHOD__)->error($k, $v);   
     }
