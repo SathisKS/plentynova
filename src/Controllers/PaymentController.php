@@ -169,10 +169,13 @@ class PaymentController extends Controller
         if($requestData['paymentKey'] == 'NOVALNET_CC' && !empty($requestData['nn_cc3d_redirect']) ) {
               $doRedirect = true;
         }
-        if (!empty($basket->customerInvoiceAddressId)) {
-            $serverRequestData = $this->paymentService->getRequestParameters($this->basketRepository->load(), $requestData['paymentKey'], $doRedirect);
+        // Get order amount from the post values
+        $orderAmount = !empty($requestData['nn_orderamount']) ? $requestData['nn_orderamount'] : 0;
+        
+        if (!empty($orderAmount)) {
+            $serverRequestData = $this->paymentService->getRequestParameters($this->basketRepository->load(), $requestData['paymentKey'], $doRedirect, $orderAmount, $billingAddressId, $shippingAddressId);
         } else {
-            $serverRequestData = $this->paymentService->getRequestParameters($this->basketRepository->load(), $requestData['paymentKey'], $doRedirect, 0, $billingAddressId, $shippingAddressId);
+            $serverRequestData = $this->paymentService->getRequestParameters($this->basketRepository->load(), $requestData['paymentKey'], $doRedirect);
         }
         
         if (empty($serverRequestData['data']['first_name']) && empty($serverRequestData['data']['last_name'])) {
@@ -203,7 +206,7 @@ class PaymentController extends Controller
                     $serverRequestData['data']['iban'] = $requestData['nn_sepa_iban'];                  
             }            
             
-            $orderAmount = !empty($requestData['nn_orderamount']) ? $requestData['nn_orderamount'] : 0;
+            
             if (!empty($basket->customerInvoiceAddressId)) {
                 $guranteeStatus = $this->paymentService->getGuaranteeStatus($this->basketRepository->load(), $requestData['paymentKey'], $orderAmount);
             } else {
