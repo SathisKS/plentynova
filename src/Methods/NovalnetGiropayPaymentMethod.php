@@ -145,9 +145,12 @@ class NovalnetGiropayPaymentMethod extends PaymentMethodService
      *
      * @return bool
      */
-    public function isSwitchableTo(): bool
+    public function isSwitchableTo($orderId = null): bool
     {
-        return true;
+        if($orderId > 0) {
+            return true;
+        }
+        return false;
     }
 
     /**
