@@ -126,9 +126,9 @@ class RefundEventProcedure
 
                     $transactionComments = '';
                     if (!empty($responseData['tid'])) {
-                        $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('refund_message_new_tid', $paymentRequestData['lang']), $parentOrder[0]->tid, sprintf('%0.2f', ($paymentRequestData['refund_param'] / 100)) , $responseData['tid']);
+                        $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('refund_message_new_tid'), $parentOrder[0]->tid, sprintf('%0.2f', ($paymentRequestData['refund_param'] / 100)) , $responseData['tid']);
                      } else {
-                        $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('refund_message', $paymentRequestData['lang']), $parentOrder[0]->tid, sprintf('%0.2f', ($paymentRequestData['refund_param'] / 100)) );
+                        $transactionComments .= PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('refund_message'), $parentOrder[0]->tid, sprintf('%0.2f', ($paymentRequestData['refund_param'] / 100)) );
                      }
                     
                     $paymentData['tid'] = !empty($responseData['tid']) ? $responseData['tid'] : $parentOrder[0]->tid;
