@@ -273,7 +273,7 @@ class CallbackController extends Controller
         if(empty($this->aryCaptureParams['vendor_activation']))
         {
             $nnTransactionHistory = $this->getOrderDetails();
-
+            $this->getLogger(__METHOD__)->error('c order', $nnTransactionHistory);
             if(is_string($nnTransactionHistory))
             {
                 return $this->renderTemplate($nnTransactionHistory);
@@ -390,7 +390,7 @@ class CallbackController extends Controller
                         if($this->aryCaptureParams['tid_status'] == '100' && $transactionStatus == '90') {
                             $callbackComments = sprintf($this->paymentHelper->getTranslatedText('callback_transaction_update_text',$orderLanguage), $this->aryCaptureParams['tid']);    
                         }           
-
+                        $this->getLogger(__METHOD__)->error('c prze', $nnTransactionHistory);
                         $this->saveTransactionLog($nnTransactionHistory, true);
 
                         $paymentData['currency']    = $this->aryCaptureParams['currency'];
@@ -729,6 +729,7 @@ class CallbackController extends Controller
      */
     public function saveTransactionLog($txnHistory, $initialLevel = false, $isPending = false)
     {
+        $this->getLogger(__METHOD__)->error('c table', $txnHistory);
         $insertTransactionLog['callback_amount'] = ($initialLevel) ? $txnHistory->order_total_amount : $this->aryCaptureParams['amount'];
         $insertTransactionLog['callback_amount'] = ($isPending) ? 0 : $insertTransactionLog['callback_amount'];
         $insertTransactionLog['amount']          = $txnHistory->order_total_amount;
@@ -737,6 +738,7 @@ class CallbackController extends Controller
         $insertTransactionLog['payment_name']    = $txnHistory->paymentName;
         $insertTransactionLog['order_no']        = $txnHistory->orderNo;
          $insertTransactionLog['additional_info']   = !empty($txnHistory->additionalInfo) ? json_encode($txnHistory->additionalInfo) : 0;
+        $this->getLogger(__METHOD__)->error('c table after', $insertTransactionLog);
         $this->transaction->saveTransaction($insertTransactionLog);
     }
 
