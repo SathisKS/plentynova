@@ -934,12 +934,17 @@ class PaymentService
         $transaction_details = (array) $end_transaction_detail;
         $transaction_details['order_no'] = $transaction_details['orderNo'];
         $transaction_details['amount'] = $transaction_details['amount'] / 100;
-        //Decoding the json as array
-        $transaction_details['additionalInfo'] = json_decode( $transaction_details['additionalInfo'], true );
-        //Merging the array
-        $transaction_details = array_merge($transaction_details, $transaction_details['additionalInfo']);
-        //Unsetting the redundant key
-        unset($transaction_details['additionalInfo']);
+        if (!empty($transaction_details['additionalInfo'])) {
+           //Decoding the json as array
+            $transaction_details['additionalInfo'] = json_decode( $transaction_details['additionalInfo'], true );
+            //Merging the array
+            $transaction_details = array_merge($transaction_details, $transaction_details['additionalInfo']);
+            //Unsetting the redundant key
+            unset($transaction_details['additionalInfo']); 
+        } else {
+            unset($transaction_details['additionalInfo']);   
+        }
+        $this->getLogger(__METHOD__)->error('add', $transaction_details);
         return $transaction_details;
         }
     }
