@@ -88,6 +88,8 @@ class NovalnetOrderConfirmationDataProvider
                     $payment_details = json_decode($get_transaction_details[0]->additionalInfo, true);
                     $db_details['test_mode'] = !empty($db_details['test_mode']) ? $db_details['test_mode'] : $payment_details['test_mode'];
                     $db_details['payment_id'] = !empty($db_details['payment_id']) ? $db_details['payment_id'] : $payment_details['payment_id'];
+                    $paymentHelper->logger('db', $db_details);
+                    $paymentHelper->logger('payment', $payment_details);
                     
                     $comments = '';
                     $comments .= PHP_EOL . $paymentHelper->getTranslatedText('nn_tid') . $db_details['tid'];
