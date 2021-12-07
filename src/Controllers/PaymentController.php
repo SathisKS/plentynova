@@ -26,6 +26,7 @@ use Novalnet\Services\PaymentService;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\ConfigRepository; 
 use Novalnet\Services\TransactionService;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class PaymentController
@@ -34,6 +35,7 @@ use Novalnet\Services\TransactionService;
  */
 class PaymentController extends Controller
 {
+    use Loggable;
     /**
      * @var Request
      */
@@ -243,7 +245,7 @@ class PaymentController extends Controller
         }
         
         $serverRequestData['data']['amount'] = !empty($serverRequestData['data']['amount']) ? $serverRequestData['data']['amount'] : $requestData['nn_orderamount'];
-        
+        $this->getLogger(__METHOD__)->error('con request', $serverRequestData);
         $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $serverRequestData); 
         if(!empty($requestData['nn_reinit'])) {
             $this->paymentService->paymentCalltoNovalnetServer();
