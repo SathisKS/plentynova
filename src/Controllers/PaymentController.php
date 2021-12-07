@@ -192,6 +192,8 @@ class PaymentController extends Controller
             $serverRequestData['data']['pan_hash'] = $requestData['nn_pan_hash'];
             $serverRequestData['data']['unique_id'] = $requestData['nn_unique_id'];
         $this->sessionStorage->getPlugin()->setValue('nnDoRedirect', $requestData['nn_cc3d_redirect']);
+             $this->getLogger(__METHOD__)->error('cc request', $serverRequestData);
+             $this->getLogger(__METHOD__)->error('cc post', $requestData);
             if(!empty($requestData['nn_cc3d_redirect']) )
             {
                 $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $serverRequestData['data']);
