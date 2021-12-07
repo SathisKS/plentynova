@@ -148,7 +148,7 @@ class NovalnetSepaPaymentMethod extends PaymentMethodService
         if($orderId > 0) {
            $orderObj = $this->paymentHelper->getOrderObject($orderId);
            $orderAmount = $this->paymentHelper->ConvertAmountToSmallerUnit($orderObj->amounts[0]->invoiceTotal);
-           $guarantee_status = $this->paymentService->getGuaranteeStatus($this->basket, 'NOVALNET_SEPA', $orderAmount);
+           $guarantee_status = $this->paymentService->getGuaranteeStatus($this->basket, 'NOVALNET_SEPA', $orderAmount, $orderObj->addressRelations[0]->addressId, $orderObj->addressRelations[1]->addressId);
             if(!empty($guarantee_status) && !in_array($guarantee_status, ['normal', 'guarantee'])) {
                 return false;
             }
