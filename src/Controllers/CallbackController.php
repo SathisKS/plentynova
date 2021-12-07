@@ -385,9 +385,9 @@ class CallbackController extends Controller
                     if ($nnTransactionHistory->order_paid_amount < $nnTransactionHistory->order_total_amount)
                     {
                         
-                        $callbackComments = sprintf($this->paymentHelper->getTranslatedText('callback_initial_execution',$orderLanguage), $this->aryCaptureParams['shop_tid'], sprintf('%0.2f', ($this->aryCaptureParams['amount']/100)), $this->aryCaptureParams['currency'], date('d.m.Y'), date('H:i:s'), $this->aryCaptureParams['tid'] ).'</br>';
+                        $callbackComments = sprintf($this->paymentHelper->getTranslatedText('callback_order_confirmation_text',$orderLanguage), date('d.m.Y'), date('H:i:s'));
                         $transactionStatus = $this->payment_details($nnTransactionHistory->orderNo, $this->aryCaptureParams['tid']);
-                        if($this->aryCaptureParams['tid_status'] == '100' && $transactionStatus == '90') {
+                        if($this->aryCaptureParams['tid_status'] == '100' && in_array($transactionStatus, ['86', '90'])) {
                             $callbackComments = sprintf($this->paymentHelper->getTranslatedText('callback_transaction_update_text',$orderLanguage), $this->aryCaptureParams['tid']);    
                         }           
                         $this->getLogger(__METHOD__)->error('c prze', $nnTransactionHistory);
