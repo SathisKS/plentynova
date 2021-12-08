@@ -290,6 +290,7 @@ class PaymentController extends Controller
     {
         $paymentKey = $this->sessionStorage->getPlugin()->getValue('paymentKey');
         $isGuarantee = $this->sessionStorage->getPlugin()->getValue('nnProcessb2bGuarantee');
+        $this->sessionStorage->getPlugin()->setValue('nnProcessb2bGuarantee', null);
         if (in_array($paymentKey, ['NOVALNET_INVOICE', 'NOVALNET_PREPAYMENT', 'NOVALNET_CASHPAYMENT'])) {
             if($paymentKey == 'NOVALNET_INVOICE' && $isGuarantee == 'guarantee') {
                 $this->sessionStorage->getPlugin()->setValue('nnProceedGuarantee', $isGuarantee);
