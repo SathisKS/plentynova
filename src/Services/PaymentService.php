@@ -956,8 +956,10 @@ class PaymentService
             $serverRequestData['data']['payment_type'] = 'GUARANTEED_DIRECT_DEBIT_SEPA';
             $serverRequestData['data']['key']          = '40';
         }
+        $this->getLogger(__METHOD__)->error('request curl', $serverRequestData);
         $response = $this->paymentHelper->executeCurl($serverRequestData['data'], $serverRequestData['url']);
         $responseData = $this->paymentHelper->convertStringToArray($response['response'], '&');
+        $this->getLogger(__METHOD__)->error('response curl', $responseData);
         $notificationMessage = $this->paymentHelper->getNovalnetStatusText($responseData);
         $responseData['payment_id'] = (!empty($responseData['payment_id'])) ? $responseData['payment_id'] : $responseData['key'];
         $isPaymentSuccess = isset($responseData['status']) && $responseData['status'] == '100';
