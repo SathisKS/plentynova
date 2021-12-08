@@ -336,7 +336,7 @@ class PaymentService
         if(!empty($address->phone)) {
             $paymentRequestData['tel'] = $address->phone;
         }
-
+        
         $url = $this->getPaymentData($paymentKey, $paymentRequestData, $doRedirect);
         return [
             'data' => $paymentRequestData,
@@ -464,8 +464,6 @@ class PaymentService
             $basket->shippingAmount = $basket->shippingAmountNet;
             $basket->basketAmount = $basket->basketAmountNet;
         }
-        $this->getLogger(__METHOD__)->error('basket amount', $basket->basketAmount);
-        $this->getLogger(__METHOD__)->error('order amount ser', $orderAmount);
         
         $ccFormRequestParameters = [
             'client_key'    => trim($this->config->get('Novalnet.novalnet_client_key')),
@@ -712,9 +710,6 @@ class PaymentService
             $minimumAmount = ((preg_match('/^[0-9]*$/', $minimumAmount) && $minimumAmount >= '999')  ? $minimumAmount : '999');
             $amount        = !empty($orderAmount) ? $orderAmount : (sprintf('%0.2f', $basket->basketAmount) * 100);
             
-            $this->getLogger(__METHOD__)->error('min amount', $minimumAmount);
-            $this->getLogger(__METHOD__)->error('tx amount', $amount);
-            
             $billingAddressId = !empty($basket->customerInvoiceAddressId) ? $basket->customerInvoiceAddressId : $billingInvoiceAddrId;
             $billingAddress = $this->addressRepository->findAddressById($billingAddressId);
             $customerBillingIsoCode = strtoupper($this->countryRepository->findIsoCode($billingAddress->countryId, 'iso_code_2'));
@@ -944,7 +939,6 @@ class PaymentService
         } else {
             unset($transaction_details['additionalInfo']);   
         }
-        $this->getLogger(__METHOD__)->error('add', $transaction_details);
         return $transaction_details;
         }
     }
