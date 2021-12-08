@@ -952,11 +952,12 @@ class PaymentService
         $serverRequestData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
         $serverRequestData['data']['order_no'] = $this->sessionStorage->getPlugin()->getValue('nnOrderNo');
         $guaranteePayment = $this->sessionStorage->getPlugin()->getValue('nnProceedGuarantee');
+        $this->sessionStorage->getPlugin()->setValue('nnProceedGuarantee', null);
         if($guaranteePayment == 'guarantee') {
             $serverRequestData['data']['payment_type'] = 'GUARANTEED_INVOICE';
             $serverRequestData['data']['key']          = '41';
         }
-        $this->sessionStorage->getPlugin()->setValue('nnProceedGuarantee', null);
+        
         $this->getLogger(__METHOD__)->error('request curl', $serverRequestData);
         $response = $this->paymentHelper->executeCurl($serverRequestData['data'], $serverRequestData['url']);
         $responseData = $this->paymentHelper->convertStringToArray($response['response'], '&');
