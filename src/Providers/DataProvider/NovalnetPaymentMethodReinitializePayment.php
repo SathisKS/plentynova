@@ -80,9 +80,6 @@ class NovalnetPaymentMethodReinitializePayment
       } else { // Set the request param for direct payments
           $sessionStorage->getPlugin()->setValue('nnPaymentData', $serverRequestData);
       }
-       
-    $paymentHelper->logger('order obj', $order);
-    $paymentHelper->logger('order Amount', $orderAmount);
     
       if ($paymentKey == 'NOVALNET_CC') {
          $ccFormDetails = $paymentService->getCreditCardAuthenticationCallData($basketRepository->load(), $paymentKey, $orderAmount, $order['billingAddress']['id'], $order['deliveryAddress']['id']);
@@ -102,9 +99,14 @@ class NovalnetPaymentMethodReinitializePayment
       // Set guarantee status
       $guarantee_status = $paymentService->getGuaranteeStatus($basketRepository->load(), $paymentKey, $orderAmount, $order['billingAddress']['id'], $order['deliveryAddress']['id']);
       $show_birthday = (empty($address->companyName) && empty($birthday)) ? $guarantee_status : '';
-
+      
+      $paymentHelper->logger('guarantee status', $guarantee_status);
+      $paymentHelper->logger('birthday status', $show_birthday);
+    
       if ($guarantee_status == 'guarantee' && $show_birthday == '') {
         $sessionStorage->getPlugin()->setValue('nnProcessb2bGuarantee', $guarantee_status);
+      } else {
+         $sessionStorage->getPlugin()->setValue('nnProcessb2bGuarantee', null);
       }
     
        
