@@ -956,6 +956,7 @@ class PaymentService
             $serverRequestData['data']['payment_type'] = 'GUARANTEED_INVOICE';
             $serverRequestData['data']['key']          = '41';
         }
+        $this->sessionStorage->getPlugin()->setValue('nnProceedGuarantee', null);
         $this->getLogger(__METHOD__)->error('request curl', $serverRequestData);
         $response = $this->paymentHelper->executeCurl($serverRequestData['data'], $serverRequestData['url']);
         $responseData = $this->paymentHelper->convertStringToArray($response['response'], '&');
