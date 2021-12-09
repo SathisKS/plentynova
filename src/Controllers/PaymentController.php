@@ -147,7 +147,7 @@ class PaymentController extends Controller
         $this->getLogger(__METHOD__)->error('redirect req', $paymentRequestData);
         if ($isPaymentSuccess && isset($paymentRequestData['pan_hash'])) {
             
-            unset($paymentRequestData['data']['pan_hash']);
+            unset($paymentRequestData['pan_hash']);
         }
         $this->getLogger(__METHOD__)->error('unset req', $paymentRequestData);
         $this->paymentService->validateResponse();
