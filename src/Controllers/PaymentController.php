@@ -145,10 +145,11 @@ class PaymentController extends Controller
         
         $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
         $this->getLogger(__METHOD__)->error('redirect req', $paymentRequestData);
-        if ($isPaymentSuccess && isset($paymentRequestData['data']['pan_hash'])) {
+        if ($isPaymentSuccess && isset($paymentRequestData['pan_hash'])) {
             
             unset($paymentRequestData['data']['pan_hash']);
         }
+        $this->getLogger(__METHOD__)->error('unset req', $paymentRequestData);
         $this->paymentService->validateResponse();
        
         return $this->response->redirectTo('confirmation');
