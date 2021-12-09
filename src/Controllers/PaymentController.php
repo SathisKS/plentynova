@@ -144,8 +144,9 @@ class PaymentController extends Controller
         $paymentRequestData = !empty($sessionPaymentRequestData) ? array_merge($sessionPaymentRequestData, $responseData) : $responseData;
         
         $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
+        $this->getLogger(__METHOD__)->error('redirect req', $paymentRequestData);
         if ($isPaymentSuccess && isset($paymentRequestData['data']['pan_hash'])) {
-            $this->getLogger(__METHOD__)->error('redirect req', $paymentRequestData);
+            
             unset($paymentRequestData['data']['pan_hash']);
         }
         $this->paymentService->validateResponse();
