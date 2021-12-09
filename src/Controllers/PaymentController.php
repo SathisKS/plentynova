@@ -205,7 +205,11 @@ class PaymentController extends Controller
                 $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $serverRequestData['data']);
                 $this->sessionStorage->getPlugin()->setValue('nnPaymentUrl',$serverRequestData['url']);
                 $this->paymentService->pushNotification($notificationMessage, 'success', 100);
-                return $this->response->redirectTo('place-order');
+                if(!empty($requestData['nn_reinit'])) {
+                    return $this->response->redirectTo('payment/novalnet/redirectPayment');
+                } else {
+                    return $this->response->redirectTo('place-order');
+                }
                 
             }
         }
