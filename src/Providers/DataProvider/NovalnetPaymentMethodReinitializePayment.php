@@ -60,12 +60,23 @@ class NovalnetPaymentMethodReinitializePayment
           }
         }
     }
+    
+    // Get the proper order amount even the system currency and payment currency are differ
+    if(count($order['amounts']) > 1) {
+       foreach($order['amounts'] as $amount) {
+           if($amount['isSystemCurrency'] == false) {
+               $invoiceAmount = $amount['invoiceTotal'];
+           }
+       }
+     } else {
+         $invoiceAmount = $order['amounts'][0]['invoiceTotal'];
+     }
       
       // Changed payment method key
        $paymentKey = $paymentHelper->getPaymentKeyByMop($mopId);
        $paymentName = $paymentHelper->getCustomizedTranslatedText('template_' . strtolower($paymentKey));
       // Get the orderamount from order object if the basket amount is empty
-       $orderAmount = $paymentHelper->ConvertAmountToSmallerUnit($order['amounts'][0]['invoiceTotal']);
+       $orderAmount = $paymentHelper->ConvertAmountToSmallerUnit($invoiceAmount);
       // Form the payment request data
       $serverRequestData = $paymentService->getRequestParameters($basketRepository->load(), $paymentKey, false, $orderAmount, $order['billingAddress']['id'], $order['deliveryAddress']['id']);
  
